@@ -68,9 +68,12 @@ class GnomeTweaks(Adw.Application):
     def do_startup(self):
         Adw.Application.do_startup(self)
 
-        self._create_action("quit", self.quit, ["<primary>q"])
+        self._create_action("quit", self.quit_app)
         self._create_action("about", self.about_cb)
         self._create_action("reset", self.reset_cb)
+
+    def quit_app(self, *argv):
+        self.quit()
 
     def reset_cb(self, action, parameter):
         def _on_dialog_response(_dialog, response_type):
@@ -135,7 +138,7 @@ class GnomeTweaks(Adw.Application):
         extensionsdialog.connect("response", lambda _dialog, _: _dialog.destroy())
         extensionsdialog.show()
 
-    def _create_action(self, name, callback, shortcuts=None):
+    def _create_action(self, name, callback):
         """Add an application action.
 
         :param name: the name of the action
@@ -146,5 +149,3 @@ class GnomeTweaks(Adw.Application):
         action = Gio.SimpleAction.new(name, None)
         action.connect("activate", callback)
         self.add_action(action)
-        if shortcuts:
-            self.set_accels_for_action(f"app.{name}", shortcuts)

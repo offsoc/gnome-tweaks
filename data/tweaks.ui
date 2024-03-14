@@ -290,5 +290,16 @@
         </child>
       </object>
     </property>
+    <child>
+      <object class="GtkShortcutController">
+        <property name="scope">global</property>
+        <child>
+          <object class="GtkShortcut">
+            <property name="action">action(app.quit)</property>
+            <property name="trigger">&lt;Ctrl&gt;q</property>
+          </object>
+        </child>
+      </object>
+    </child>
   </template>
 </interface>
